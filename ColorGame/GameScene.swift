@@ -68,6 +68,10 @@ class GameScene: SKScene {
         playerSprite?.position = CGPoint(x: playerXPosition, y: self.size.height / 2)
         
         self.addChild(playerSprite!)
+        
+        let pulseEmitter = SKEmitterNode(fileNamed: "pulse")!
+        playerSprite?.addChild(pulseEmitter)
+        pulseEmitter.position = CGPoint(x: 0, y: 0)
     }
     
     func moveVertically(upPressed: Bool) {

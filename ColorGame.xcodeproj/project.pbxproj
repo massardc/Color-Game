@@ -16,6 +16,8 @@
 		BFA0F3F6200A99F90029E206 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F3F5200A99F90029E206 /* Assets.xcassets */; };
 		BFA0F3F9200A99F90029E206 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F3F7200A99F90029E206 /* LaunchScreen.storyboard */; };
 		BFA0F401200A9A670029E206 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F400200A9A670029E206 /* Sounds */; };
+		BFA0F403200AACDD0029E206 /* pulse.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F402200AACDD0029E206 /* pulse.sks */; };
+		BFA0F405200AADEC0029E206 /* fireworks.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F404200AADEC0029E206 /* fireworks.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		BFA0F3F8200A99F90029E206 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFA0F3FA200A99F90029E206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFA0F400200A9A670029E206 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		BFA0F402200AACDD0029E206 /* pulse.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = pulse.sks; sourceTree = "<group>"; };
+		BFA0F404200AADEC0029E206 /* fireworks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireworks.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			children = (
 				BFA0F3E8200A99F90029E206 /* AppDelegate.swift */,
 				BFA0F3EA200A99F90029E206 /* GameScene.sks */,
+				BFA0F402200AACDD0029E206 /* pulse.sks */,
+				BFA0F404200AADEC0029E206 /* fireworks.sks */,
 				BFA0F3EC200A99F90029E206 /* Actions.sks */,
 				BFA0F3EE200A99F90029E206 /* GameScene.swift */,
 				BFA0F3F0200A99F90029E206 /* GameViewController.swift */,
@@ -135,6 +141,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA0F405200AADEC0029E206 /* fireworks.sks in Resources */,
+				BFA0F403200AACDD0029E206 /* pulse.sks in Resources */,
 				BFA0F401200A9A670029E206 /* Sounds in Resources */,
 				BFA0F3F4200A99F90029E206 /* Main.storyboard in Resources */,
 				BFA0F3EB200A99F90029E206 /* GameScene.sks in Resources */,
