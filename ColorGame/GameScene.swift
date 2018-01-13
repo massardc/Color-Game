@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-enum Enemy {
+enum Enemy: Int {
     case small
     case medium
     case large
@@ -39,6 +39,12 @@ class GameScene: SKScene {
                 enemiesGoingUpArray.append(GKRandomSource.sharedRandom().nextBool())
             }
         }
+
+        
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([SKAction.run {
+            self.spawnEnemies()
+            }, SKAction.wait(forDuration: 2)])))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -93,6 +99,7 @@ class GameScene: SKScene {
     
     func createEnemy(type: Enemy, forTrack track: Int) -> SKShapeNode? {
         let enemySprite = SKShapeNode()
+        enemySprite.name = "ENEMY"
         
         switch type {
         case .small:
@@ -117,6 +124,21 @@ class GameScene: SKScene {
         enemySprite.physicsBody?.velocity = up ? CGVector(dx: 0, dy: velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
         
         return enemySprite
+    }
+    
+    func spawnEnemies() {
+        for i in 1...7 {
+            let randomEnemyType = Enemy(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 3))!
+            if let newEnemy = createEnemy(type: randomEnemyType, forTrack: i) {
+                self.addChild(newEnemy)
+            }
+        }
+        
+        self.enumerateChildNodes(withName: "ENEMY") { (node: SKNode, nil) in
+            if node.position.y < -150 || node.position.y > self.size.height + 150 {
+                node.removeFromParent()
+            }
+        }
     }
     
     func moveVertically(upPressed: Bool) {
