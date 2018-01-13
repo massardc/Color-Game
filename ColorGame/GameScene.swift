@@ -9,6 +9,12 @@
 import SpriteKit
 import GameplayKit
 
+enum Enemy {
+    case small
+    case medium
+    case large
+}
+
 class GameScene: SKScene {
     
     // MARK: - Variables
@@ -17,11 +23,22 @@ class GameScene: SKScene {
     var currentTrack = 0
     var movingToTrack = false
     var moveSound = SKAction.playSoundFileNamed("Sounds/move.wav", waitForCompletion: false)
+    let trackVelocities = [180, 200, 250]
+    var velocityArray = [Int]()
+    var enemiesGoingUpArray = [Bool]()
     
     // MARK: - Class functions
     override func didMove(to view: SKView) {
         setupTracks()
         createPlayer()
+        
+        if let numberOfTracks = tracksArray?.count {
+            for _ in 0...numberOfTracks {
+                let randomIndex  = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+                velocityArray.append(trackVelocities[randomIndex])
+                enemiesGoingUpArray.append(GKRandomSource.sharedRandom().nextBool())
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -72,6 +89,34 @@ class GameScene: SKScene {
         let pulseEmitter = SKEmitterNode(fileNamed: "pulse")!
         playerSprite?.addChild(pulseEmitter)
         pulseEmitter.position = CGPoint(x: 0, y: 0)
+    }
+    
+    func createEnemy(type: Enemy, forTrack track: Int) -> SKShapeNode? {
+        let enemySprite = SKShapeNode()
+        
+        switch type {
+        case .small:
+            enemySprite.path = CGPath(roundedRect: CGRect(x: -10, y: 0, width: 20, height: 70), cornerWidth: 8, cornerHeight: 8, transform: nil)
+            enemySprite.fillColor = UIColor(red: 0.4431, green: 0.5529, blue: 0.7451, alpha: 1)
+        case .medium:
+            enemySprite.path = CGPath(roundedRect: CGRect(x: -10, y: 0, width: 20, height: 100), cornerWidth: 8, cornerHeight: 8, transform: nil)
+            enemySprite.fillColor = UIColor(red: 0.7804, green: 0.4039, blue: 0.4039, alpha: 1)
+        case .large:
+            enemySprite.path = CGPath(roundedRect: CGRect(x: -10, y: 0, width: 20, height: 130), cornerWidth: 8, cornerHeight: 8, transform: nil)
+            enemySprite.fillColor = UIColor(red: 0.7804, green: 0.6392, blue: 0.4039, alpha: 1)
+        }
+        
+        guard let enemyPosition = tracksArray?[track].position else { return nil }
+        
+        let up = enemiesGoingUpArray[track]
+        
+        enemySprite.position.x = enemyPosition.x
+        enemySprite.position.y = up ? -130 : self.size.height + 130
+        
+        enemySprite.physicsBody = SKPhysicsBody(edgeLoopFrom: enemySprite.path!)
+        enemySprite.physicsBody?.velocity = up ? CGVector(dx: 0, dy: velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
+        
+        return enemySprite
     }
     
     func moveVertically(upPressed: Bool) {
