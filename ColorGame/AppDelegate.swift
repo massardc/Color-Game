@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  ColorGame
 //
-//  Created by School on 13/01/2018.
+//  Created by ClementM on 13/01/2018.
 //  Copyright © 2018 ClementM. All rights reserved.
 //
 
