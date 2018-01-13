@@ -15,6 +15,7 @@
 		BFA0F3F4200A99F90029E206 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F3F2200A99F90029E206 /* Main.storyboard */; };
 		BFA0F3F6200A99F90029E206 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F3F5200A99F90029E206 /* Assets.xcassets */; };
 		BFA0F3F9200A99F90029E206 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F3F7200A99F90029E206 /* LaunchScreen.storyboard */; };
+		BFA0F401200A9A670029E206 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = BFA0F400200A9A670029E206 /* Sounds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BFA0F3F5200A99F90029E206 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0F3F8200A99F90029E206 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFA0F3FA200A99F90029E206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFA0F400200A9A670029E206 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				BFA0F3F0200A99F90029E206 /* GameViewController.swift */,
 				BFA0F3F2200A99F90029E206 /* Main.storyboard */,
 				BFA0F3F5200A99F90029E206 /* Assets.xcassets */,
+				BFA0F400200A9A670029E206 /* Sounds */,
 				BFA0F3F7200A99F90029E206 /* LaunchScreen.storyboard */,
 				BFA0F3FA200A99F90029E206 /* Info.plist */,
 			);
@@ -132,6 +135,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA0F401200A9A670029E206 /* Sounds in Resources */,
 				BFA0F3F4200A99F90029E206 /* Main.storyboard in Resources */,
 				BFA0F3EB200A99F90029E206 /* GameScene.sks in Resources */,
 				BFA0F3F6200A99F90029E206 /* Assets.xcassets in Resources */,
