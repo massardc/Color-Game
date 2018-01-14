@@ -20,17 +20,24 @@ class GameScene: SKScene {
     // MARK: - Variables
     var tracksArray: [SKSpriteNode]? = [SKSpriteNode]()
     var playerSprite: SKSpriteNode?
+    var targetSprite: SKSpriteNode?
     var currentTrack = 0
     var movingToTrack = false
     var moveSound = SKAction.playSoundFileNamed("Sounds/move.wav", waitForCompletion: false)
     let trackVelocities = [180, 200, 250]
     var velocityArray = [Int]()
     var enemiesGoingUpArray = [Bool]()
+    let playerSpriteCategory: UInt32 = 0x1 << 0
+    let enemySpriteCategory: UInt32 = 0x1 << 1
+    let targetSpriteCategory: UInt32 = 0x1 << 2
     
     // MARK: - Class functions
     override func didMove(to view: SKView) {
         setupTracks()
         createPlayer()
+        createTarget()
+        
+        self.physicsWorld.contactDelegate = self
         
         if let numberOfTracks = tracksArray?.count {
             for _ in 0...numberOfTracks {
@@ -52,11 +59,11 @@ class GameScene: SKScene {
             let touchLocation = touch.previousLocation(in: self)
             let node = self.nodes(at: touchLocation).first
             
-            if node?.name == "right" {
+            if (node?.name?.contains("right"))! {
                 moveHorizontally()
-            } else if node?.name == "up" {
+            } else if (node?.name?.contains("up"))! {
                 moveVertically(upPressed: true)
-            } else if node?.name == "down" {
+            } else if (node?.name?.contains("down"))! {
                 moveVertically(upPressed: false)
             }
         }
@@ -87,6 +94,12 @@ class GameScene: SKScene {
     
     func createPlayer() {
         playerSprite = SKSpriteNode(imageNamed: "player")
+        playerSprite?.physicsBody = SKPhysicsBody(circleOfRadius: playerSprite!.size.width / 2)
+        playerSprite?.physicsBody?.linearDamping = 0
+        playerSprite?.physicsBody?.categoryBitMask = playerSpriteCategory
+        playerSprite?.physicsBody?.collisionBitMask = 0
+        playerSprite?.physicsBody?.contactTestBitMask = enemySpriteCategory | targetSpriteCategory
+        
         guard let playerXPosition = tracksArray?.first?.position.x else { return }
         playerSprite?.position = CGPoint(x: playerXPosition, y: self.size.height / 2)
         
@@ -121,9 +134,17 @@ class GameScene: SKScene {
         enemySprite.position.y = up ? -130 : self.size.height + 130
         
         enemySprite.physicsBody = SKPhysicsBody(edgeLoopFrom: enemySprite.path!)
+        enemySprite.physicsBody?.categoryBitMask = enemySpriteCategory
         enemySprite.physicsBody?.velocity = up ? CGVector(dx: 0, dy: velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
         
         return enemySprite
+    }
+    
+    func createTarget() {
+        targetSprite = self.childNode(withName: "target") as? SKSpriteNode
+        targetSprite?.physicsBody = SKPhysicsBody(circleOfRadius: targetSprite!.size.width / 2)
+        targetSprite?.physicsBody?.categoryBitMask = targetSpriteCategory
+        targetSprite?.physicsBody?.collisionBitMask = 0
     }
     
     func spawnEnemies() {
@@ -167,6 +188,27 @@ class GameScene: SKScene {
             currentTrack += 1
             
             self.run(moveSound)
+        }
+    }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        var playerBody: SKPhysicsBody
+        var otherBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            playerBody = contact.bodyA
+            otherBody = contact.bodyB
+        } else {
+            playerBody = contact.bodyB
+            otherBody = contact.bodyA
+        }
+        
+        if playerBody.categoryBitMask == playerSpriteCategory && otherBody.categoryBitMask == enemySpriteCategory {
+            print("Enemy hit")
+        } else if playerBody.categoryBitMask == playerSpriteCategory && otherBody.categoryBitMask == targetSpriteCategory {
+            print("Target hit")
         }
     }
 }
