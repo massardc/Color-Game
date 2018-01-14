@@ -65,27 +65,25 @@ extension GameScene {
         playerSprite?.removeAllActions()
         movingToTrack = true
         
-        if currentTrack + 1 < tracksArray!.count {
-            guard let nextTrack = tracksArray?[currentTrack + 1].position else { return }
+        guard let nextTrack = tracksArray?[currentTrack + 1].position else { return }
+        
+        if let player = self.playerSprite {
+            let moveAction = SKAction.move(to: CGPoint(x: nextTrack.x, y: player.position.y), duration: 0.2)
             
-            if let player = self.playerSprite {
-                let moveAction = SKAction.move(to: CGPoint(x: nextTrack.x, y: player.position.y), duration: 0.2)
+            let goingUpwards = enemiesGoingUpArray[currentTrack + 1]
+            
+            player.run(moveAction, completion: {
+                self.movingToTrack = false
                 
-                let goingUpwards = enemiesGoingUpArray[currentTrack + 1]
-                
-                player.run(moveAction, completion: {
-                    self.movingToTrack = false
-                    
-                    if self.currentTrack != 8 {
-                        self.playerSprite?.physicsBody?.velocity = goingUpwards ? CGVector(dx: 0, dy: self.velocityArray[self.currentTrack]) : CGVector(dx: 0, dy: -self.velocityArray[self.currentTrack])
-                    } else {
-                        self.playerSprite?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                    }
-                })
-                currentTrack += 1
-                
-                self.run(moveSound)
-            }
+                if self.currentTrack != 8 {
+                    self.playerSprite?.physicsBody?.velocity = goingUpwards ? CGVector(dx: 0, dy: self.velocityArray[self.currentTrack]) : CGVector(dx: 0, dy: -self.velocityArray[self.currentTrack])
+                } else {
+                    self.playerSprite?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                }
+            })
+            currentTrack += 1
+            
+            self.run(moveSound)
         }
     }
     

@@ -18,10 +18,11 @@ enum Enemy: Int {
 extension GameScene {
     
     func createHUD() {
+        pauseSprite = self.childNode(withName: "pause") as? SKSpriteNode
         timeLabel = self.childNode(withName: "time") as? SKLabelNode
         scoreLabel = self.childNode(withName: "score") as? SKLabelNode
         
-        remainingTime = 20
+        remainingTime = 60
         currentScore = 0
     }
     

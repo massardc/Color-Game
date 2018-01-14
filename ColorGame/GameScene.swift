@@ -24,6 +24,7 @@ class GameScene: SKScene {
     var targetSprite: SKSpriteNode?
     
     // MARK: HUD
+    var pauseSprite: SKSpriteNode?
     var timeLabel: SKLabelNode?
     var scoreLabel: SKLabelNode?
     var currentScore = 0 {
@@ -91,11 +92,15 @@ class GameScene: SKScene {
             let node = self.nodes(at: touchLocation).first
             
             if node?.name == "right" {
-                moveHorizontally()
+                if currentTrack < 8 {
+                    moveHorizontally()
+                }
             } else if node?.name == "up" {
                 moveVertically(upPressed: true)
             } else if node?.name == "down" {
                 moveVertically(upPressed: false)
+            } else if node?.name == "pause" {
+                scene?.isPaused = !(scene?.isPaused)!
             }
         }
     }
