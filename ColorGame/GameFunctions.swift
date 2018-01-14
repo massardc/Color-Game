@@ -63,4 +63,24 @@ extension GameScene {
             self.run(moveSound)
         }
     }
+    
+    func movePlayerToStart() {
+        if let player = self.playerSprite {
+            player.removeFromParent()
+            self.playerSprite = nil
+            self.createPlayer()
+            self.currentTrack = 0
+        }
+    }
+    
+    func nextLevel(playerPhysicsBody: SKPhysicsBody) {
+        self.run(SKAction.playSoundFileNamed("Sounds/levelUp.wav", waitForCompletion: true))
+        let emitter = SKEmitterNode(fileNamed: "fireworks.sks")
+        playerPhysicsBody.node?.addChild(emitter!)
+        
+        self.run(SKAction.wait(forDuration: 0.5)) {
+            emitter?.removeFromParent()
+            self.movePlayerToStart()
+        }
+    }
 }

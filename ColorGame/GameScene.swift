@@ -28,10 +28,13 @@ class GameScene: SKScene {
     let enemySpriteCategory: UInt32 = 0x1 << 1
     let targetSpriteCategory: UInt32 = 0x1 << 2
     
+    // MARK: Sound
+    let moveSound = SKAction.playSoundFileNamed("Sounds/move.wav", waitForCompletion: false)
+    var backgroundNoise: SKAudioNode!
+
     // MARK: Other Variables
     var currentTrack = 0
     var movingToTrack = false
-    var moveSound = SKAction.playSoundFileNamed("Sounds/move.wav", waitForCompletion: false)
 
     
     
@@ -43,6 +46,11 @@ class GameScene: SKScene {
         createTarget()
         
         self.physicsWorld.contactDelegate = self
+        
+        if let musicURL = Bundle.main.url(forResource: "Sounds/background", withExtension: "wav") {
+            backgroundNoise = SKAudioNode(url: musicURL)
+            addChild(backgroundNoise)
+        }
         
         if let numberOfTracks = tracksArray?.count {
             for _ in 0...numberOfTracks {
@@ -87,6 +95,11 @@ class GameScene: SKScene {
     // MARK: Update
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        if let player = self.playerSprite {
+            if player.position.y > self.size.height || player.position.y < 0 {
+                movePlayerToStart()
+            }
+        }
     }
     
 }
@@ -106,9 +119,10 @@ extension GameScene: SKPhysicsContactDelegate {
         }
         
         if playerBody.categoryBitMask == playerSpriteCategory && otherBody.categoryBitMask == enemySpriteCategory {
-            print("Enemy hit")
+            self.run(SKAction.playSoundFileNamed("Sounds/fail.wav", waitForCompletion: true))
+            movePlayerToStart()
         } else if playerBody.categoryBitMask == playerSpriteCategory && otherBody.categoryBitMask == targetSpriteCategory {
-            print("Target hit")
+            nextLevel(playerPhysicsBody: playerBody)
         }
     }
 }
