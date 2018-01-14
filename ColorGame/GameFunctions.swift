@@ -20,10 +20,25 @@ extension GameScene {
     }
     
     func spawnEnemies() {
+        
+        var randomTrackNumber = 0
+        let createPowerUp = GKRandomSource.sharedRandom().nextBool()
+        
+        // Creates power up
+        if createPowerUp {
+            randomTrackNumber = GKRandomSource.sharedRandom().nextInt(upperBound: 6) + 1
+            if let powerUpObject = self.createPowerUp(forTrack: randomTrackNumber) {
+                self.addChild(powerUpObject)
+            }
+        }
+        
+        // Creates enmies
         for i in 1...7 {
-            let randomEnemyType = Enemy(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 3))!
-            if let newEnemy = createEnemy(type: randomEnemyType, forTrack: i) {
-                self.addChild(newEnemy)
+            if randomTrackNumber != i {
+                let randomEnemyType = Enemy(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 3))!
+                if let newEnemy = createEnemy(type: randomEnemyType, forTrack: i) {
+                    self.addChild(newEnemy)
+                }
             }
         }
         
