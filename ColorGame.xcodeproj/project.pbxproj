@@ -24,6 +24,7 @@
 		BFE0350B200BF2AD0026DD23 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE03507200BF2AD0026DD23 /* GameOverScene.swift */; };
 		BFE0350C200BF2AD0026DD23 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFE03508200BF2AD0026DD23 /* GameOverScene.sks */; };
 		BFE0350D200BF2AD0026DD23 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFE03509200BF2AD0026DD23 /* StartScene.sks */; };
+		BFE0350F200BFA950026DD23 /* ScrollingBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0350E200BFA950026DD23 /* ScrollingBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		BFE03507200BF2AD0026DD23 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		BFE03508200BF2AD0026DD23 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		BFE03509200BF2AD0026DD23 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
+		BFE0350E200BFA950026DD23 /* ScrollingBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				BFE03507200BF2AD0026DD23 /* GameOverScene.swift */,
 				BFE03502200BD4CA0026DD23 /* GameElements.swift */,
 				BFE03504200BD5320026DD23 /* GameFunctions.swift */,
+				BFE0350E200BFA950026DD23 /* ScrollingBackground.swift */,
 				BFA0F3EC200A99F90029E206 /* Actions.sks */,
 				BFA0F3F2200A99F90029E206 /* Main.storyboard */,
 				BFA0F3F5200A99F90029E206 /* Assets.xcassets */,
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFE03505200BD5320026DD23 /* GameFunctions.swift in Sources */,
+				BFE0350F200BFA950026DD23 /* ScrollingBackground.swift in Sources */,
 				BFE0350A200BF2AD0026DD23 /* StartScene.swift in Sources */,
 				BFE0350B200BF2AD0026DD23 /* GameOverScene.swift in Sources */,
 				BFE03503200BD4CA0026DD23 /* GameElements.swift in Sources */,
