@@ -21,7 +21,7 @@ extension GameScene {
         timeLabel = self.childNode(withName: "time") as? SKLabelNode
         scoreLabel = self.childNode(withName: "score") as? SKLabelNode
         
-        remainingTime = 60
+        remainingTime = 20
         currentScore = 0
     }
     

@@ -25,6 +25,7 @@
 		BFE0350C200BF2AD0026DD23 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFE03508200BF2AD0026DD23 /* GameOverScene.sks */; };
 		BFE0350D200BF2AD0026DD23 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFE03509200BF2AD0026DD23 /* StartScene.sks */; };
 		BFE0350F200BFA950026DD23 /* ScrollingBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0350E200BFA950026DD23 /* ScrollingBackground.swift */; };
+		BFE03511200BFF560026DD23 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE03510200BFF560026DD23 /* GameHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		BFE03508200BF2AD0026DD23 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		BFE03509200BF2AD0026DD23 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		BFE0350E200BFA950026DD23 /* ScrollingBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingBackground.swift; sourceTree = "<group>"; };
+		BFE03510200BFF560026DD23 /* GameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				BFE03502200BD4CA0026DD23 /* GameElements.swift */,
 				BFE03504200BD5320026DD23 /* GameFunctions.swift */,
 				BFE0350E200BFA950026DD23 /* ScrollingBackground.swift */,
+				BFE03510200BFF560026DD23 /* GameHandler.swift */,
 				BFA0F3EC200A99F90029E206 /* Actions.sks */,
 				BFA0F3F2200A99F90029E206 /* Main.storyboard */,
 				BFA0F3F5200A99F90029E206 /* Assets.xcassets */,
@@ -203,6 +206,7 @@
 				BFE0350A200BF2AD0026DD23 /* StartScene.swift in Sources */,
 				BFE0350B200BF2AD0026DD23 /* GameOverScene.swift in Sources */,
 				BFE03503200BD4CA0026DD23 /* GameElements.swift in Sources */,
+				BFE03511200BFF560026DD23 /* GameHandler.swift in Sources */,
 				BFA0F3EF200A99F90029E206 /* GameScene.swift in Sources */,
 				BFA0F3F1200A99F90029E206 /* GameViewController.swift in Sources */,
 				BFA0F3E9200A99F90029E206 /* AppDelegate.swift in Sources */,
