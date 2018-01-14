@@ -23,6 +23,20 @@ class GameScene: SKScene {
     var playerSprite: SKSpriteNode?
     var targetSprite: SKSpriteNode?
     
+    // MARK: HUD
+    var timeLabel: SKLabelNode?
+    var scoreLabel: SKLabelNode?
+    var currentScore = 0 {
+        didSet {
+            self.scoreLabel?.text = "SCORE: \(self.currentScore)"
+        }
+    }
+    var remainingTime: TimeInterval = 60 {
+        didSet {
+            self.timeLabel?.text = "TIME: \(Int(self.remainingTime))"
+        }
+    }
+    
     // MARK: Collision Categories
     let playerSpriteCategory: UInt32 = 0x1 << 0
     let enemySpriteCategory: UInt32 = 0x1 << 1
@@ -42,6 +56,8 @@ class GameScene: SKScene {
     // MARK: Entry Point
     override func didMove(to view: SKView) {
         setupTracks()
+        createHUD()
+        launchGameTimer()
         createPlayer()
         createTarget()
         
@@ -72,11 +88,11 @@ class GameScene: SKScene {
             let touchLocation = touch.previousLocation(in: self)
             let node = self.nodes(at: touchLocation).first
             
-            if (node?.name?.contains("right"))! {
+            if node?.name == "right" {
                 moveHorizontally()
-            } else if (node?.name?.contains("up"))! {
+            } else if node?.name == "up" {
                 moveVertically(upPressed: true)
-            } else if (node?.name?.contains("down"))! {
+            } else if node?.name == "down" {
                 moveVertically(upPressed: false)
             }
         }
@@ -99,6 +115,10 @@ class GameScene: SKScene {
             if player.position.y > self.size.height || player.position.y < 0 {
                 movePlayerToStart()
             }
+        }
+        
+        if remainingTime <= 5 {
+            timeLabel?.fontColor = UIColor.red
         }
     }
     

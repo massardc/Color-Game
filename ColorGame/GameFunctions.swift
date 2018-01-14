@@ -11,6 +11,14 @@ import GameplayKit
 
 extension GameScene {
     
+    func launchGameTimer() {
+        let timeAction = SKAction.repeatForever(SKAction.sequence([SKAction.run({
+            self.remainingTime -= 1
+        }), SKAction.wait(forDuration: 1)]))
+        
+        timeLabel?.run(timeAction)
+    }
+    
     func spawnEnemies() {
         for i in 1...7 {
             let randomEnemyType = Enemy(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 3))!
@@ -42,25 +50,27 @@ extension GameScene {
         playerSprite?.removeAllActions()
         movingToTrack = true
         
-        guard let nextTrack = tracksArray?[currentTrack + 1].position else { return }
-        
-        if let player = self.playerSprite {
-            let moveAction = SKAction.move(to: CGPoint(x: nextTrack.x, y: player.position.y), duration: 0.2)
+        if currentTrack + 1 < tracksArray!.count {
+            guard let nextTrack = tracksArray?[currentTrack + 1].position else { return }
             
-            let goingUpwards = enemiesGoingUpArray[currentTrack + 1]
-            
-            player.run(moveAction, completion: {
-                self.movingToTrack = false
+            if let player = self.playerSprite {
+                let moveAction = SKAction.move(to: CGPoint(x: nextTrack.x, y: player.position.y), duration: 0.2)
                 
-                if self.currentTrack != 8 {
-                    self.playerSprite?.physicsBody?.velocity = goingUpwards ? CGVector(dx: 0, dy: self.velocityArray[self.currentTrack]) : CGVector(dx: 0, dy: -self.velocityArray[self.currentTrack])
-                } else {
-                    self.playerSprite?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                }
-            })
-            currentTrack += 1
-            
-            self.run(moveSound)
+                let goingUpwards = enemiesGoingUpArray[currentTrack + 1]
+                
+                player.run(moveAction, completion: {
+                    self.movingToTrack = false
+                    
+                    if self.currentTrack != 8 {
+                        self.playerSprite?.physicsBody?.velocity = goingUpwards ? CGVector(dx: 0, dy: self.velocityArray[self.currentTrack]) : CGVector(dx: 0, dy: -self.velocityArray[self.currentTrack])
+                    } else {
+                        self.playerSprite?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                    }
+                })
+                currentTrack += 1
+                
+                self.run(moveSound)
+            }
         }
     }
     
@@ -74,7 +84,9 @@ extension GameScene {
     }
     
     func nextLevel(playerPhysicsBody: SKPhysicsBody) {
+        currentScore += 1
         self.run(SKAction.playSoundFileNamed("Sounds/levelUp.wav", waitForCompletion: true))
+        
         let emitter = SKEmitterNode(fileNamed: "fireworks.sks")
         playerPhysicsBody.node?.addChild(emitter!)
         
